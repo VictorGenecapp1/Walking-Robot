@@ -5,6 +5,13 @@ const EAST = 2;
 const SOUTH = 3;
 const WEST = 4;
 
+$direction = [ 1 => "NORTH", 2 => "EAST", 3 => "SOUTH", 4 => "WEST"];
+
+const MULTIPLIER_1 = 1;
+const MULTIPLIER_2 = 1;
+const MULTIPLIER_3 = -1;
+const MULTIPLIER_4 = -1;
+
 $x = $argv[1];
 $y = $argv[2];
 
@@ -19,7 +26,6 @@ if($presentDirection != 'NORTH' && $presentDirection != 'EAST' && $presentDirect
 }
 
 $presentDirectionNumber = constant($presentDirection);
-
 $path = $argv[4];
 
 for($i = 0; $i < strlen($path); $i++ ){
@@ -40,19 +46,10 @@ for($i = 0; $i < strlen($path); $i++ ){
                         }
                         break;
                 case 'W':
-			switch($presentDirectionNumber){
-				case NORTH:
-					$y += $path{$i+1};
-					break;
-                                case EAST:
-					$x += $path{$i+1};
-                                        break;
-                                case SOUTH:
-                                        $y -= $path{$i+1};
-                                        break;
-                                case WEST:
-                                        $x -= $path{$i+1};
-                                        break;
+			if( !($presentDirectionNumber % 2) ){
+				$x += ($path{$i+1} * constant("MULTIPLIER_".$presentDirectionNumber) );
+			} else {
+				$y += ($path{$i+1} * constant("MULTIPLIER_".$presentDirectionNumber) );
 			}
 			$i++;
                         break;
@@ -67,22 +64,6 @@ for($i = 0; $i < strlen($path); $i++ ){
 
 }
 
-echo $x." ".$y." ";
-
-switch($presentDirectionNumber){
-	case NORTH:
-        	echo "NORTH\n";
-                break;
-        case EAST:
-                echo "EAST\n";
-                break;
-        case SOUTH:
-                echo "SOUTH\n";
-                break;
-        case WEST:
-                echo "WEST\n";
-                break;
-
-}
+echo $x." ".$y." ".$direction[$presentDirectionNumber]."\n";
 
 ?>
