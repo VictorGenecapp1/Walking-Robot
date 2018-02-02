@@ -1,7 +1,5 @@
 <?php
 
-//var_dump($argv);
-
 const NORTH = 1;
 const EAST = 2;
 const SOUTH = 3;
@@ -21,7 +19,7 @@ if($presentDirection != 'NORTH' && $presentDirection != 'EAST' && $presentDirect
 }
 
 $presentDirectionNumber = constant($presentDirection);
-//echo($presentDirectionNumber)."\n";
+
 $path = $argv[4];
 
 for($i = 0; $i < strlen($path); $i++ ){
@@ -33,7 +31,6 @@ for($i = 0; $i < strlen($path); $i++ ){
 			} else {
 				$presentDirectionNumber++;
 			}
-			//echo $presentDirectionNumber."\n";
 			break;
                 case 'L':
                         if($presentDirectionNumber == 1){
@@ -41,24 +38,19 @@ for($i = 0; $i < strlen($path); $i++ ){
                         } else {
                                 $presentDirectionNumber--;
                         }
-			//echo $presentDirectionNumber."\n";
                         break;
                 case 'W':
 			switch($presentDirectionNumber){
 				case NORTH:
-					//echo $path{$i+1}."Move +ve Y Co-ordiante\n";
 					$y += $path{$i+1};
 					break;
                                 case EAST:
-                                        //echo $path{$i+1}."Move +ve X Co-ordiante\n";
 					$x += $path{$i+1};
                                         break;
                                 case SOUTH:
-                                       	//echo $path{$i+1}."Move -ve Y Co-ordiante\n";
                                         $y -= $path{$i+1};
                                         break;
                                 case WEST:
-                                        //echo $path{$i+1}."Move -ve X Co-ordiante\n";
                                         $x -= $path{$i+1};
                                         break;
 			}
